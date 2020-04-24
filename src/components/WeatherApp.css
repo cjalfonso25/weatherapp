@@ -1,0 +1,112 @@
+.weather-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: url("../img/clouds-rainy-rain-asia-639.jpg");
+  background-size: cover;
+  color: white;
+}
+
+.weather-app .weather-location {
+  padding: 16px 0;
+}
+
+.weather-app .change-location {
+  cursor: pointer;
+}
+
+.weather-app .additional-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.weather-app .additional-info .info {
+  display: flex;
+  margin-bottom: 16px;
+  margin-left: auto;
+  width: 160px;
+}
+
+@media screen and (max-width: 767px) {
+  .weather-app .additional-info {
+    margin-top: 32px;
+  }
+
+  .weather-app .additional-info .info {
+    margin-left: 0;
+  }
+}
+
+.weather-app .additional-info .icon {
+  margin-right: 16px;
+  width: 30px;
+  height: 30px;
+  font-size: 32px;
+}
+
+.weather-app .weather-location .weather-icon i {
+  font-size: 60px;
+}
+
+.weather-app .weather-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  padding: 16px 0;
+}
+
+.weather-app .weather-temperature {
+  padding: 16px 0;
+}
+
+.weather-app .weather-temperature .row > [class*="col-"] {
+  margin-top: 24px;
+}
+
+.weather-app .weather-temperature .data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 8px;
+  /* background-color: rgba(100, 100, 100, 0.4); */
+  box-shadow: 0 0 22px #000;
+}
+
+.weather-app .weather-temperature .data .temperature {
+  margin-top: 20px;
+}
+
+input[type="text"] {
+  box-shadow: 0 0 20px #000;
+  background-color: rgba(100, 100, 100, 0.4);
+  color: #fff;
+  border: none;
+  /* filter: blur(10px); */
+}
+
+.form-control:focus {
+  box-shadow: 0 0 20px #000 !important;
+  background-color: rgba(100, 100, 100, 0.4) !important;
+  color: #fff !important;
+  border: none !important;
+  outline: none;
+}
+
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: pink;
+}
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: pink;
+}
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: pink;
+}
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: pink;
+}
