@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import Loader from "react-loader-spinner";
+import Form from "../common/Form";
 
 const WeatherInput = ({ data }) => {
   return (
@@ -14,21 +15,13 @@ const WeatherInput = ({ data }) => {
             <Loader type="ThreeDots" color="#fff" height={80} width={80} />
           </div>
         ) : (
-          <form
-            onSubmit={(e) => data.handleSubmit(e)}
-            className={!data.showLocationInput ? "d-none" : " d-block"}
-          >
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter your location here"
-              value={data.location}
-              onKeyPress={(e) =>
-                e.key === "Enter" ? data.handleSubmit(e) : null
-              }
-              onChange={(e) => data.setLocation(e.target.value)}
-            />
-          </form>
+          <Form
+            input={data.input}
+            onSubmit={data.handleSubmit}
+            showLocationInput={data.showLocationInput}
+            location={data.location}
+            setLocation={data.setLocation}
+          />
         )}
       </div>
     </div>

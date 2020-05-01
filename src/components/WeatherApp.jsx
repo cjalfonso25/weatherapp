@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Temperatures from "./Temperatures/Temperatures";
 import "moment-timezone";
@@ -23,6 +23,12 @@ const WeatherApp = () => {
   const [showChangeLocation, setShowChangeLocation] = useState(false);
   const [showLocationInput, setShowLocationInput] = useState(true);
 
+  const input = useRef(null);
+
+  useEffect(() => {
+    input.current.focus();
+  }, []);
+
   useEffect(() => {
     if (address) {
       const str = address.split(", ");
@@ -44,12 +50,16 @@ const WeatherApp = () => {
           location
       )
       .then((response) => {
-        setAddress(response.data.location);
-        setHourlyData(response.data.forecast.hourly.data);
-        setWeatherSummary(response.data.forecast.daily.summary);
-        setSunriseTime(response.data.forecast.daily.data[0].sunriseTime);
-        setSunsetTime(response.data.forecast.daily.data[0].sunsetTime);
-        setHumidity(response.data.forecast.daily.data[0].humidity);
+        const data = response.data;
+        const forecast = response.data.forecast;
+        const dailyForecast = response.data.forecast.daily.data[0];
+
+        setAddress(data.location);
+        setHourlyData(forecast.hourly.data);
+        setWeatherSummary(forecast.daily.summary);
+        setSunriseTime(dailyForecast.sunriseTime);
+        setSunsetTime(dailyForecast.sunsetTime);
+        setHumidity(dailyForecast.humidity);
         setIsLoading(false);
       })
       .catch(function (error) {
@@ -58,8 +68,9 @@ const WeatherApp = () => {
   };
 
   const toggleChangeLocation = () => {
-    setShowChangeLocation(false);
-    setShowLocationInput(true);
+    setShowChangeLocation(!showChangeLocation);
+    setShowLocationInput(!showLocationInput);
+    input.current.focus();
   };
 
   const indexOfLastHour = currentPage * hoursPerPage;
@@ -86,6 +97,7 @@ const WeatherApp = () => {
 
       <WeatherInput
         data={{
+          input,
           weatherSummary,
           isLoading,
           showLocationInput,
